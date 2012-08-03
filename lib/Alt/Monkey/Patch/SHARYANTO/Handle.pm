@@ -84,10 +84,8 @@ sub DESTROY {
                 if ($stack->[$i+1][0] eq 'wrap' &&
                         ($i == 0 || $stack->[$i-1][0] eq 'delete')) {
                     my $p = $self->{patcher};
-                    warn "Cannot unapply patch to $name ".
-                        "(applied in $p->[1]:$p->[2]) before other patches: ".
-                            "will cause the next patch to stop working\n";
-                    return;
+                    warn "Warning: unapplying patch to $name ".
+                        "(applied in $p->[1]:$p->[2]) before a wrapping patch";
                 }
             }
 
@@ -95,7 +93,11 @@ sub DESTROY {
             if ($i == @$stack-1) {
                 if ($i) {
                     no warnings 'redefine';
-                    *$name = $stack->[$i-1][2] // $stack->[$i-1][1];
+                    if ($stack->[$i-1][0] eq 'delete') {
+                        delete_sub $name;
+                    } else {
+                        *$name = $stack->[$i-1][2] // $stack->[$i-1][1];
+                    }
                 } else {
                     delete_sub $name;
                 }

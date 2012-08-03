@@ -124,9 +124,8 @@ sub patch_package {
 =head1 DESCRIPTION
 
 Monkey-patching is the act of modifying a package at runtime: adding a
-subroutine/method, replacing/deleting/wrapping another, etc.
-
-Perl makes it easy to do that, for example:
+subroutine/method, replacing/deleting/wrapping another, etc. Perl makes it easy
+to do that, for example:
 
  # add a subroutine
  *{"Target::sub1"} = sub { ... };
@@ -138,8 +137,8 @@ Perl makes it easy to do that, for example:
  # delete a subroutine
  undef *{"Target::sub3"};
 
-This module helps you apply a stack of patches and unapply them later in
-flexible order.
+This module makes things even easier by helping you apply a stack of patches and
+unapply them later in flexible order.
 
 
 =head1 FUNCTIONS
@@ -181,14 +180,13 @@ Die on error.
 
 Function returns a handle object. As soon as you lose the value of the handle
 (by calling in void context, assigning over the variable, undeffing the
-variable, letting it go out of scope, etc), the patch is unapplied. Patches can
-be unapplied in random order, but if a conflict condition happens, your program
-will die.
+variable, letting it go out of scope, etc), the patch is unapplied.
 
-Example of a conflict condition: first patch (P1) adds a subroutine and second
-patch (P2) wraps it. If P1 is unapplied before P2, the subroutine is now no
-longer there, and P2 no longer works. Unapplying P1 after P2 works, of course.
-
+Patches can be unapplied in random order, but unapplying a patch where the next
+patch is a wrapper can lead to an error. Example: first patch (P1) adds a
+subroutine and second patch (P2) wraps it. If P1 is unapplied before P2, the
+subroutine is now no longer there, and P2 no longer works. Unapplying P1 after
+P2 works, of course.
 
 =head1 FAQ
 
