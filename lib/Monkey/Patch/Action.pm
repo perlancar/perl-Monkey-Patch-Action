@@ -1,4 +1,4 @@
-package Monkey::Patch;
+package Monkey::Patch::Action;
 
 use 5.010;
 use warnings;
@@ -6,7 +6,7 @@ use strict;
 
 # VERSION
 
-use Monkey::Patch::Handle;
+use Monkey::Patch::Action::Handle;
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(patch_package);
@@ -44,7 +44,7 @@ sub patch_package {
 
     my @caller = caller(0);
 
-    Monkey::Patch::Handle->new(
+    Monkey::Patch::Action::Handle->new(
         package => $package,
         subname => $subname,
         extra   => \@extra,
@@ -60,7 +60,7 @@ sub patch_package {
 
 =head1 SYNOPSIS
 
- use Monkey::Patch qw(patch_package);
+ use Monkey::Patch::Action qw(patch_package);
 
  package Foo;
  sub sub1  { say "Foo's sub1" }
@@ -191,7 +191,7 @@ P2 works, of course.
 
 =head1 FAQ
 
-=head2 Differences with Paul Driver's Monkey::Patch?
+=head2 Differences with Monkey::Patch?
 
 This module is based on the wonderful L<Monkey::Patch> by Paul Driver. The
 differences are:
@@ -215,8 +215,8 @@ original subroutine.
 
 =item *
 
-Paul Driver's Monkey::Patch adds convenience for patching classes and objects.
-To keep things simple, no such convenience is currently provided by this module.
+Monkey::Patch adds convenience for patching classes and objects. To keep things
+simple, no such convenience is currently provided by this module.
 C<patch_package()> *can* patch classes and objects as well (see the next FAQ
 entry).
 
@@ -255,8 +255,6 @@ behavior for a certain object only, you can do something like:
 
 =head1 SEE ALSO
 
-Paul Driver's Monkey::Patch
-
-L<Alt>
+L<Monkey::Patch>
 
 =cut

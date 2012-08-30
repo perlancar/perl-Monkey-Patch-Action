@@ -1,4 +1,4 @@
-package Monkey::Patch::Handle;
+package Monkey::Patch::Action::Handle;
 
 use 5.010;
 use strict;

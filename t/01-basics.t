@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Test::More 0.96;
 
-use Monkey::Patch qw(patch_package);
+use Monkey::Patch::Action qw(patch_package);
 
 package Foo;
 

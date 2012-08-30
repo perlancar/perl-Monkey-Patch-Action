@@ -1,4 +1,10 @@
-Revision history for Alt-Monkey-Patch-SHARYANTO
+Revision history for Monkey-Patch-Action
+
+0.02    2012-08-30 (SHARYANTO) (not yet released)
+
+        Rename dist from Alt-Monkey-Patch-SHARYANTO to Monkey-Patch-Action, this
+        is not an Alt module (incompatible interface).
+
 
 0.01    2012-08-03 (SHARYANTO)
 
