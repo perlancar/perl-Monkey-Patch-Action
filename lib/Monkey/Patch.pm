@@ -1,4 +1,4 @@
-package Alt::Monkey::Patch::SHARYANTO;
+package Monkey::Patch;
 
 use 5.010;
 use warnings;
@@ -6,7 +6,7 @@ use strict;
 
 # VERSION
 
-use Alt::Monkey::Patch::SHARYANTO::Handle;
+use Monkey::Patch::Handle;
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(patch_package);
@@ -44,7 +44,7 @@ sub patch_package {
 
     my @caller = caller(0);
 
-    Alt::Monkey::Patch::SHARYANTO::Handle->new(
+    Monkey::Patch::Handle->new(
         package => $package,
         subname => $subname,
         extra   => \@extra,
@@ -60,7 +60,7 @@ sub patch_package {
 
 =head1 SYNOPSIS
 
- use Alt::Monkey::Patch::SHARYANTO qw(patch_package);
+ use Monkey::Patch qw(patch_package);
 
  package Foo;
  sub sub1  { say "Foo's sub1" }
@@ -188,11 +188,13 @@ subroutine and second patch (P2) wraps it. If P1 is unapplied before P2, the
 subroutine is now no longer there, and P2 no longer works. Unapplying P1 after
 P2 works, of course.
 
+
 =head1 FAQ
 
-=head2 Differences with Monkey::Patch?
+=head2 Differences with Paul Driver's Monkey::Patch?
 
-This module is based on L<Monkey::Patch> by Paul Driver. The differences are:
+This module is based on the wonderful L<Monkey::Patch> by Paul Driver. The
+differences are:
 
 =over 4
 
@@ -203,14 +205,20 @@ wrapping them.
 
 =item *
 
+Interface to patch_package() is slightly different (see previous item for the
+cause).
+
+=item *
+
 Using this module, the wrapper receives a context hash instead of just the
 original subroutine.
 
 =item *
 
-Monkey::Patch adds convenience for patching classes and objects. To keep things
-simple, no such convenience is currently provided by this module.
-C<patch_package()> *can* patch classes and objects as well (see the next FAQ entry).
+Paul Driver's Monkey::Patch adds convenience for patching classes and objects.
+To keep things simple, no such convenience is currently provided by this module.
+C<patch_package()> *can* patch classes and objects as well (see the next FAQ
+entry).
 
 =back
 
@@ -243,5 +251,12 @@ behavior for a certain object only, you can do something like:
      }
      $ctx->{orig}->(@_);
  }, $obj);
+
+
+=head1 SEE ALSO
+
+Paul Driver's Monkey::Patch
+
+L<Alt>
 
 =cut

@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Test::More 0.96;
 
-use Alt::Monkey::Patch::SHARYANTO qw(patch_package);
+use Monkey::Patch qw(patch_package);
 
 package Foo;
 

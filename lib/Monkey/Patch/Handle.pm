@@ -1,4 +1,4 @@
-package Alt::Monkey::Patch::SHARYANTO::Handle;
+package Monkey::Patch::Handle;
 
 use 5.010;
 use strict;
