@@ -64,7 +64,6 @@ sub new {
             goto &{$self->{code}};
         };
         push @$stack, [$type => $code => $wrapper];
-        no warnings; # shut up warning about prototype mismatch
         *$name = $wrapper;
     }
 
@@ -97,7 +96,6 @@ sub DESTROY {
                     if ($stack->[$i-1][0] eq 'delete') {
                         delete_sub $name;
                     } else {
-                        no warnings; # shut up warning about prototype mismatch
                         *$name = $stack->[$i-1][2] // $stack->[$i-1][1];
                     }
                 } else {
