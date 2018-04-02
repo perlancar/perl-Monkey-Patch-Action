@@ -302,10 +302,7 @@ Usage:
  patch_object($obj, $methname, $action, $code, @extra) => HANDLE
 
 Basically just a wrapper for C<patch_package> to patch "only specific
-object(s)". C<$obj> is a blessed reference, or (to patch multiple objects at
-once) an arrayref containing blessed references.
-
-Basically it does this:
+object(s)". Basically it does something like this:
 
  die "'$obj' is not an object" unless blessed($obj);
  my $package = ref($obj);
@@ -351,11 +348,6 @@ Using this module, the wrapper receives a context hash instead of just the
 original subroutine.
 
 =item *
-
-Monkey::Patch adds convenience for patching classes and objects. To keep things
-simple, no such convenience is currently provided by this module.
-C<patch_package()> *can* patch classes and objects as well (see the next FAQ
-entry).
 
 =back
 
