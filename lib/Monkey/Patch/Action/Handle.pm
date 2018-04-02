@@ -1,13 +1,14 @@
 package Monkey::Patch::Action::Handle;
 
+# DATE
+# VERSION
+
 use 5.010;
 use strict;
 use warnings;
 
 use Scalar::Util qw(weaken);
 use Sub::Delete;
-
-# VERSION
 
 my %stacks;
 
