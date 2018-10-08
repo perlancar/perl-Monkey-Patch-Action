@@ -4,7 +4,7 @@ package Monkey::Patch::Action::Handle;
 # VERSION
 
 use 5.010;
-use strict;
+use strict 'subs', 'vars';
 use warnings;
 
 use Scalar::Util qw(weaken);
@@ -42,7 +42,6 @@ sub new {
 
     my $self = bless \%args, $class;
 
-    no strict 'refs';
     no warnings 'redefine';
     if ($type eq 'sub') {
         push @$stack, [$type => $code];
@@ -90,7 +89,6 @@ sub DESTROY {
                 }
             }
 
-            no strict 'refs';
             if ($i == @$stack-1) {
                 if ($i) {
                     no warnings 'redefine';
