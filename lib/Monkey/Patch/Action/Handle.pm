@@ -42,9 +42,9 @@ sub new {
 
     my $self = bless \%args, $class;
 
-    no warnings 'redefine';
     if ($type eq 'sub') {
         push @$stack, [$type => $code];
+        no warnings 'redefine';
         *$name = $code;
     } elsif ($type eq 'delete') {
         $code = sub {};
@@ -64,6 +64,7 @@ sub new {
             goto &{$self->{code}};
         };
         push @$stack, [$type => $code => $wrapper];
+        no warnings 'redefine';
         *$name = $wrapper;
     }
 
